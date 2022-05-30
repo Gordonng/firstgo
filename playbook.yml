@@ -1,4 +1,4 @@
-hosts: localhost
+hosts: masternode
   tasks:
   - name: Deploy the service
     k8s:
