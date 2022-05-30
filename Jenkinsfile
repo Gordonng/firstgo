@@ -41,7 +41,8 @@ pipeline {
        }
        stage('Publish') {
            environment {
-               registryCredential = 'dockerhub'
+               registry = "ggg222999/firstgo" 
+               registryCredential = 'ggg222999'
            }
            steps{
                script {
