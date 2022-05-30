@@ -1,5 +1,8 @@
 ---
 - hosts: masternode
+  vars:
+    version: "{{version}}"
+    ansible_ssh_private_key_file: "/root/.ssh/id_rsa"
   tasks:
   - name: Deploy the service
     k8s:
