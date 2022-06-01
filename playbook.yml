@@ -12,6 +12,12 @@
         kind: Namespace
         state: present    # State=present when you need to create new object
 
+    - name: Transfer file from ansible server to kubernetes master
+      synchronize:
+        src: /var/lib/jenkins/jobs/cicd-pipeline/workspace/pod.yaml
+        dest: /tmp
+      delegate_to: 192.168.1.66
+
 # Creating a Kubernetes pod in ata-namespace using file stored locally
 
     - name: Create a pod
