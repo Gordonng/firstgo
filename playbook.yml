@@ -1,45 +1,20 @@
 ---
-- name: Ansible k8s module example
-# Creating the namespace in the kubernete cluster
-  hosts: masternode
-# Defining the remote server where the k8 module will manage the objects
-  remote_user: rootubuntu   # Using Remote user as ubuntu
+- hosts: masternode
+  gather_facts: false
+  remote_user: root
+  vars:
+    version: "{{version}}"
+    ansible_ssh_private_key_file: "/var/lib/jenkins/.ssh/id_rsa"
   tasks:
-    - name: Create a k8s namespace
+    - name: Deploy the service
       k8s:
-        name: ata-namespace # defining the namespace
-        api_version: v1
-        kind: Namespace
-        state: present    # State=present when you need to create new object
-
-    - name: Transfer file from ansible server to kubernetes master
-      synchronize:
-        src: /var/lib/jenkins/jobs/cicd-pipeline/workspace/pod.yaml
-        dest: /tmp
-      delegate_to: 192.168.1.66
-
-# Creating a Kubernetes pod in ata-namespace using file stored locally
-
-    - name: Create a pod
+        state: present
+        src: /tmp/service.yml
+        validate_certs: no
+        namespace: default
+    - name: Deploy the application
       k8s:
-        state: present      # State=present when you need to create new object
-        namespace: ata-namespace  # defining the namespace
-        src: /tmp/pod.yaml
-
-# Checking the a Kubernetes pods in the ata-namespace
-
-    - name: Get an existing Pods in the kubernetes cluster
-      k8s:
-        api_version: v1
-        kind: pod
-        name: nginx
-        namespace: ata-namespace  # defining the namespace
-      register: web_service
-
-# Creating a Kubernetes deployment in ata-namespace using file stored locally
-
-    - name: Create a deployment
-      k8s:
-        state: present            # State=present when you need to create new object
-        namespace: ata-namespace  # defining the namespace
-        src: /tmp/deployment.yaml  # Source file location
+        state: present
+        src: /tmp/deployment.yml
+        validate_certs: no
+        namespace: default
