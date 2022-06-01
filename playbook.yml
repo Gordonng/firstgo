@@ -12,13 +12,19 @@
         kind: Namespace
         state: present    # State=present when you need to create new object
 
+
+      - name: Check that the somefile.conf exists
+        state:
+          path: /tmp/pod.yaml
+        register: pod_result
+
 # Creating a Kubernetes pod in ata-namespace using file stored locally
 
     - name: Create a pod
       k8s:
         state: present      # State=present when you need to create new object
         namespace: ata-namespace  # defining the namespace
-        src: /tmp/pod.yml
+        src: /tmp/pod.yaml
 
 # Checking the a Kubernetes pods in the ata-namespace
 
@@ -36,4 +42,4 @@
       k8s:
         state: present            # State=present when you need to create new object
         namespace: ata-namespace  # defining the namespace
-        src: /tmp/deployment.yml  # Source file location
+        src: /tmp/deployment.yaml  # Source file location
