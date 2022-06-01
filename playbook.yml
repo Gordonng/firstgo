@@ -8,10 +8,23 @@
   tasks:
     - name: Deploy the service
       k8s:
+	apiVersion: v1
+	kind: Service
         state: present
-        src: /tmp/service.yml
         validate_certs: no
         namespace: default
+        metadata:
+          name: hello-svc
+        spec:
+          selector:
+            role: app
+          ports:
+            - protocol: TCP
+              port: 80
+              targetPort: 8080
+              nodePort: 32000
+          type: NodePort
+
     - name: Deploy the application
       k8s:
         state: present
