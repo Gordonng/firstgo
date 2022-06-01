@@ -12,20 +12,6 @@
         kind: Namespace
         state: present    # State=present when you need to create new object
 
-# Copying the Pod.yaml and deployment.yaml in the remote node which will be further used to create the pods and deployment in the kubernetes cluster
-
-    - name: copying file with playbook
-      become: true
-      copy:
-        src: /root/workspace/cicd/pod.yaml
-        dest: /tmp/pod.yaml
-
-    - name: copying file with playbook
-      become: true
-      copy:
-        src: /root/workspace/cicd/deployment.yaml
-        dest: /tmp/deployment.yaml
-
 # Creating a Kubernetes pod in ata-namespace using file stored locally
 
     - name: Create a pod
