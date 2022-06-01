@@ -8,7 +8,7 @@
     - name: Deploy the service
       k8s:
         state: present
-        definition: "{{ lookup('file', 'service.yml') | replace ('TAG',version) }}"
+        definition: "{{ lookup('file', 'service.yml') }}"
         validate_certs: no
         namespace: default
     - name: Deploy the application
