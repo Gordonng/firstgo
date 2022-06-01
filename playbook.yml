@@ -18,7 +18,7 @@
       k8s:
         state: present      # State=present when you need to create new object
         namespace: ata-namespace  # defining the namespace
-        src: /tmp/pod.yaml
+        src: /tmp/pod.yml
 
 # Checking the a Kubernetes pods in the ata-namespace
 
@@ -36,4 +36,4 @@
       k8s:
         state: present            # State=present when you need to create new object
         namespace: ata-namespace  # defining the namespace
-        src: /tmp/deployment.yaml  # Source file location
+        src: /tmp/deployment.yml  # Source file location
