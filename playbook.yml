@@ -1,33 +1,53 @@
 ---
-- hosts: masternode
-  gather_facts: false
-  remote_user: root
-  vars:
-    version: "{{version}}"
-    ansible_ssh_private_key_file: "/var/lib/jenkins/.ssh/id_rsa"
+- name: Ansible k8s module example
+# Creating the namespace in the kubernete cluster
+  hosts: masternode
+# Defining the remote server where the k8 module will manage the objects
+  remote_user: rootubuntu   # Using Remote user as ubuntu
   tasks:
-    - name: Deploy the service
+    - name: Create a k8s namespace
       k8s:
-	apiVersion: v1
-	kind: Service
-        state: present
-        validate_certs: no
-        namespace: default
-        metadata:
-          name: hello-svc
-        spec:
-          selector:
-            role: app
-          ports:
-            - protocol: TCP
-              port: 80
-              targetPort: 8080
-              nodePort: 32000
-          type: NodePort
+        name: ata-namespace # defining the namespace
+        api_version: v1
+        kind: Namespace
+        state: present    # State=present when you need to create new object
 
-    - name: Deploy the application
+# Copying the Pod.yaml and deployment.yaml in the remote node which will be further used to create the pods and deployment in the kubernetes cluster
+
+    - name: copying file with playbook
+      become: true
+      copy:
+        src: /root/workspace/cicd/pod.yaml
+        dest: /tmp/pod.yaml
+
+    - name: copying file with playbook
+      become: true
+      copy:
+        src: /root/workspace/cicd/deployment.yaml
+        dest: /tmp/deployment.yaml
+
+# Creating a Kubernetes pod in ata-namespace using file stored locally
+
+    - name: Create a pod
       k8s:
-        state: present
-        validate_certs: no
-        namespace: default
-        definition: "{{ lookup('file', 'deployment.yml') | replace ('TAG',version) }}"
+        state: present      # State=present when you need to create new object
+        namespace: ata-namespace  # defining the namespace
+        src: /tmp/pod.yaml
+
+# Checking the a Kubernetes pods in the ata-namespace
+
+    - name: Get an existing Pods in the kubernetes cluster
+      k8s:
+        api_version: v1
+        kind: pod
+        name: nginx
+        namespace: ata-namespace  # defining the namespace
+      register: web_service
+
+# Creating a Kubernetes deployment in ata-namespace using file stored locally
+
+    - name: Create a deployment
+      k8s:
+        state: present            # State=present when you need to create new object
+        namespace: ata-namespace  # defining the namespace
+        src: /tmp/deployment.yaml  # Source file location
