@@ -1,7 +1,11 @@
 ---
+<<<<<<< HEAD
 - hosts: masternode
   vars:
     ansible_ssh_private_key_file: "/var/lib/jenkins/.ssh/id_rsa"
+=======
+- hosts: localhost
+>>>>>>> 4cf8b94add559a4c38aad8b2f85485d54b6aa9c6
   tasks:
   - name: Deploy the service
     k8s:
