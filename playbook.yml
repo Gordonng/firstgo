@@ -1,5 +1,4 @@
 ---
-okup('file', 'forecast.yml') | replace ('TAG',version) }}"
 - hosts: masternode
   gather_facts: false
   vars:
