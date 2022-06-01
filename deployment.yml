@@ -16,7 +16,4 @@ spec:
     spec:
       containers:
       - name: app
-        image: app
-        resources:
-          requests:
-            cpu: 10m
+        image: ggg222999/firstgo:latest
