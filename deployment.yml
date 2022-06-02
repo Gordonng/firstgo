@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: hello-deployment
   labels:
-    role: app
+    app: app
 spec:
   replicas: 2
   selector:
     matchLabels:
-      role: app
+      app: app
   template:
     metadata:
       labels:
-        role: app
+        app: app
     spec:
       containers:
       - name: app
