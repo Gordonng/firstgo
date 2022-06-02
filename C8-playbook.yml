@@ -1,5 +1,6 @@
 ---
-- gather_facts: false
+- hosts: C8-masternode
+  gather_facts: false
   remote_user: root
   vars:
     version: "{{version}}"

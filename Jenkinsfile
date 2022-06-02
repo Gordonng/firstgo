@@ -53,12 +53,21 @@ pipeline {
                }
            }
        }
-       stage ('Deploy') {
+       stage ('C7-Deploy') {
            steps {
                script{
                    def image_id = registry + ":$BUILD_NUMBER"
                    sh "cp -f *.yml /tmp/"
-                   sh "ansible-playbook C7-masternode -i inventory playbook.yml --extra-vars \"image_id=${image_id}\""
+                   sh "ansible-playbook -i inventory C7-playbook.yml --extra-vars \"image_id=${image_id}\""
+               }
+           }
+       }
+       stage ('C8-Deploy') {
+           steps {
+               script{
+                   def image_id = registry + ":$BUILD_NUMBER"
+                   sh "cp -f *.yml /tmp/"
+                   sh "ansible-playbook -i inventory C8-playbook.yml --extra-vars \"image_id=${image_id}\""
                }
            }
        }
