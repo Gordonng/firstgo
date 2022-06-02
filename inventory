@@ -1,9 +1,8 @@
 [jenkins]
 COS7001 ansible_host=192.168.1.66 ansible_port=22
 
-[masternode]
+[C7-masternode]
 192.168.1.73 ansible_ssh_user=root ansible_python_interpreter="/usr/bin/python3"
 
-[workernode]
-w-node1 ansible_host=192.168.1.74 ansible_port=22
-w-node2 ansible_host=192.168.1.75 ansible_port=22
+[C8-masternode]
+192.168.1.61 ansible_ssh_user=root ansible_python_interpreter="/usr/bin/python3"

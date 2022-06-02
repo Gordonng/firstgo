@@ -1,6 +1,5 @@
 ---
-- hosts: masternode
-  gather_facts: false
+- gather_facts: false
   remote_user: root
   vars:
     version: "{{version}}"
