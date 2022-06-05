@@ -76,7 +76,7 @@ pipeline {
                script{
                    def image_id = registry + ":$BUILD_NUMBER"
                    sh "cp -f *.yml /tmp/"
-                   sh "ansible-playbook -i inventory AWS-playbook.yml -vvvv --extra-vars \"image_id=${image_id}\""
+                   sh "ansible-playbook -i inventory AWS-playbook.yml --extra-vars \"image_id=${image_id}\""
                }
            }
        }
