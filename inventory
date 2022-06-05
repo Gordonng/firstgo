@@ -8,5 +8,5 @@ COS7001 ansible_host=192.168.1.66 ansible_port=22
 192.168.1.61 ansible_ssh_user=root ansible_python_interpreter="/usr/bin/python3.6"
 
 [AWSmasternode]
-18.134.95.214 ansible_ssh_user=root ansible_python_interpreter="/usr/bin/python3"
+18.134.95.214 ansible_ssh_user=root ansible_python_interpreter="/usr/bin/python"
 
