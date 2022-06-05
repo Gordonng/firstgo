@@ -1,10 +1,10 @@
 ---
 - hosts: AWSmasternode
-  gather_facts: false
+  gather_facts: true
   remote_user: root
   vars:
     version: "{{version}}"
-    ansible_ssh_private_key_file: "/var/lib/jenkins/.ssh/GOR2AWS.pem"
+    ansible_ssh_private_key_file: "/var/lib/jenkins/.ssh/id_rsa"
   tasks:
     - name: copying service.yml playbook
       become: true 
