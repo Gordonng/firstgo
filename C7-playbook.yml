@@ -1,5 +1,5 @@
 ---
-- hosts: C7-masternode
+- hosts: C7masternode
   gather_facts: false
   remote_user: root
   vars:

@@ -1,5 +1,5 @@
 ---
-- hosts: 18.134.95.214
+- hosts: AWSmasternode
   gather_facts: false
   remote_user: ec2-user
   vars:

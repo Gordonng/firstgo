@@ -1,5 +1,5 @@
 ---
-- hosts: C8-masternode
+- hosts: C8masternode
   gather_facts: false
   remote_user: root
   vars:
